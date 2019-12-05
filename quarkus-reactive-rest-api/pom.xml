@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.limadelrey</groupId>
+    <artifactId>quarkus-reactive-rest-api</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.quarkus</groupId>
+                <artifactId>quarkus-bom</artifactId>
+                <scope>import</scope>
+                <type>pom</type>
+                <version>1.0.1.Final</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/io.quarkus/quarkus-resteasy-jackson -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-resteasy-jackson</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.jboss.resteasy/resteasy-rxjava2 -->
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-rxjava2</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.quarkus/quarkus-reactive-pg-client -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-reactive-pg-client</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.quarkus/quarkus-smallrye-openapi -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-smallrye-openapi</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.quarkus/quarkus-swagger-ui -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-swagger-ui</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.quarkus/quarkus-smallrye-metrics -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-smallrye-metrics</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.10</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <!-- https://mvnrepository.com/artifact/io.quarkus/quarkus-maven-plugin -->
+                <groupId>io.quarkus</groupId>
+                <artifactId>quarkus-maven-plugin</artifactId>
+                <version>1.0.1.Final</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>native</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <!-- https://mvnrepository.com/artifact/io.quarkus/quarkus-maven-plugin -->
+                        <groupId>io.quarkus</groupId>
+                        <artifactId>quarkus-maven-plugin</artifactId>
+                        <version>1.0.1.Final</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>native-image</goal>
+                                </goals>
+                                <configuration>
+                                    <enableHttpUrlHandler>true</enableHttpUrlHandler>
+                                    <additionalBuildArgs>-Dfile.encoding=UTF-8</additionalBuildArgs>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+</project>

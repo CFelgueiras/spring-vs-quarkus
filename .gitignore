@@ -4,4 +4,7 @@ spring-rest-api/*.iml
 quarkus-rest-api/.idea/**
 quarkus-rest-api/target/**
 quarkus-rest-api/*.iml
+quarkus-reactive-rest-api/.idea/**
+quarkus-reactive-rest-api/target/**
+quarkus-reactive-rest-api/*.iml
 .idea/**
