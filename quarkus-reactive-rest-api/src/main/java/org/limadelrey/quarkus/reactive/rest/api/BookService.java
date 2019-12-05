@@ -1,4 +1,4 @@
-package org.limadelrey.quarkus.reactive.rest.api.service;
+package org.limadelrey.quarkus.reactive.rest.api;
 
 import io.reactivex.Completable;
 import io.reactivex.Single;
@@ -8,7 +8,7 @@ import org.limadelrey.quarkus.reactive.rest.api.model.json.response.InsertBookRe
 import org.limadelrey.quarkus.reactive.rest.api.model.json.response.ReadBookResponse;
 import org.limadelrey.quarkus.reactive.rest.api.model.json.request.UpdateBookRequest;
 import org.limadelrey.quarkus.reactive.rest.api.model.json.response.UpdateBookResponse;
-import org.limadelrey.quarkus.reactive.rest.api.repository.BookRepository;
+import org.limadelrey.quarkus.reactive.rest.api.BookRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;

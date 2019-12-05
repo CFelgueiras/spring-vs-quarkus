@@ -6,4 +6,4 @@ RUN chmod 775 /work
 
 EXPOSE 8078
 
-CMD ["./application", "-Dquarkus.http.host=0.0.0.0", "-Xmx64m"]
+CMD ["./application", "-Dquarkus.http.host=0.0.0.0"]

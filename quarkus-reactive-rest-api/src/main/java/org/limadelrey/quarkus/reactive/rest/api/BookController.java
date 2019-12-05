@@ -1,4 +1,4 @@
-package org.limadelrey.quarkus.reactive.rest.api.controller;
+package org.limadelrey.quarkus.reactive.rest.api;
 
 import io.reactivex.Single;
 import org.eclipse.microprofile.metrics.MetricUnits;
@@ -11,7 +11,6 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
-import org.limadelrey.quarkus.reactive.rest.api.service.BookService;
 import org.limadelrey.quarkus.reactive.rest.api.model.json.request.InsertBookRequest;
 import org.limadelrey.quarkus.reactive.rest.api.model.json.request.UpdateBookRequest;
 import org.limadelrey.quarkus.reactive.rest.api.model.json.response.InsertBookResponse;

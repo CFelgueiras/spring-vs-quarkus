@@ -1,4 +1,4 @@
-package org.limadelrey.quarkus.reactive.rest.api.repository;
+package org.limadelrey.quarkus.reactive.rest.api;
 
 import io.reactivex.Completable;
 import io.reactivex.Single;
@@ -40,12 +40,14 @@ public class BookRepository {
 
     public Single<Book> readOne(UUID id) {
         return client.rxPreparedQuery(SQL_SELECT_BY_ID, Tuple.of(id))
-                .flatMap(result -> Single.just(Book.of(result.iterator().next())));
+                .flatMap(result -> Single.just(Book.of(result.iterator().next())))
+                .onErrorResumeNext(Single::error);
     }
 
     public Completable insert(Book book) {
         return client.rxPreparedQuery(SQL_INSERT_BY_ID, Tuple.of(book.getId(), book.getAuthor(), book.getTitle()))
-                .flatMapCompletable(result -> Completable.complete());
+                .flatMapCompletable(result -> Completable.complete())
+                .onErrorResumeNext(Completable::error);
     }
 
     public Completable update(UUID id, Book book) {
@@ -56,7 +58,8 @@ public class BookRepository {
                     } else {
                         return Completable.error(new NoSuchElementException("No book with id " + id + "."));
                     }
-                }).onErrorResumeNext(Completable::error);
+                })
+                .onErrorResumeNext(Completable::error);
     }
 
     public Completable delete(UUID id) {
