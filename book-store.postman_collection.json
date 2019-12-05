@@ -6,130 +6,263 @@
 	},
 	"item": [
 		{
-			"name": "Get all books.",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{host}}/api/v1/books",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"api",
-						"v1",
-						"books"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Insert new book.",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"author\": \"George Orwell\",\n\t\"title\": \"1984\"\n}"
+			"name": "docs",
+			"item": [
+				{
+					"name": "Get Open API specification.",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/open-api",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"open-api"
+							]
+						}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "{{host}}/api/v1/books",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"api",
-						"v1",
-						"books"
-					]
+				{
+					"name": "Get Swagger UI.",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/swagger-ui",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"swagger-ui"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "Get book by id.",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "{{host}}/api/v1/books/1",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"api",
-						"v1",
-						"books",
-						"1"
-					]
+			"name": "metrics",
+			"item": [
+				{
+					"name": "Get Open Metrics specification.",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/metrics",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"metrics"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "Update book by id.",
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"author\": \"Alexandre Dumas\",\n\t\"title\": \"The Count of Monte Cristo\"\n}"
+			"name": "api",
+			"item": [
+				{
+					"name": "Get all books.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b2022bec-7c79-4a60-b35a-e7738f917bc1",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/v1/books",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"books"
+							]
+						}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "{{host}}/api/v1/books/1",
-					"host": [
-						"{{host}}"
+				{
+					"name": "Insert new book.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a30d1781-f2ac-49c8-955b-84d1c8613ef9",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Body returned id\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"id\");",
+									"    ",
+									"    var response = pm.response.json();",
+									"    ",
+									"    pm.environment.set(\"book_id\", response.id);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
 					],
-					"path": [
-						"api",
-						"v1",
-						"books",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete book by id.",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "{{host}}/api/v1/books/1",
-					"host": [
-						"{{host}}"
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"author\": \"George Orwell\",\n\t\"title\": \"1984\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/books",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get book by id.",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/v1/books/{{book_id}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"books",
+								"{{book_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update book by id.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ccfc7802-51e7-4224-b808-2117f1338691",
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
 					],
-					"path": [
-						"api",
-						"v1",
-						"books",
-						"1"
-					]
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"author\": \"Alexandre Dumas\",\n\t\"title\": \"The Count of Monte Cristo\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/books/{{book_id}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"books",
+								"{{book_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete book by id.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "99924a1e-ce23-4a66-bd7b-c5d4a84d20bc",
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/v1/books/{{book_id}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"books",
+								"{{book_id}}"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			],
+			"protocolProfileBehavior": {}
 		}
 	]
 }
