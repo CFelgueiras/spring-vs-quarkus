@@ -10,12 +10,6 @@ Run docker container:
 $ docker run --name book-store-db -p 5432:5432 -e POSTGRES_PASSWORD=postgres --network book-store-network -d postgres:alpine
 ```
 
-## Prometheus
-Run docker container:
-```bash
-$ docker run --name prometheus -p 9090:9090 -v /Users/i2sjfl/IdeaProjects/spring-vs-quarkus/quarkus-demo/prometheus.yml:/etc/prometheus/prometheus.yml --network book-store-network -d prom/prometheus
-```
-
 ## Spring Rest API
 Generate fat .jar:
 ```bash
@@ -45,4 +39,43 @@ $ docker build -t quarkus/book-store .
 Run docker container:
 ```bash
 $ docker run -i --rm --name book-store-quarkus-api -p 8081:8080 --network book-store-network quarkus/book-store
+```
+
+## Quarkus Rest API (Reactive)
+Generate native executable:
+```bash
+$ mvn package -Pnative -Dnative-image.docker-build=true
+```
+
+Build docker image:
+```bash
+$ docker build -t quarkus/reactive-book-store .
+```
+
+Run docker container:
+```bash
+$ docker run -i --rm --name book-store-quarkus-reactive-api -p 8082:8080 --network book-store-network quarkus/reactive-book-store
+```
+
+## Prometheus
+Run docker container (don't forget to change user folder location):
+```bash
+$ docker run --name prometheus -p 9090:9090 -v {USER_FOLDER}/prometheus.yml:/etc/prometheus/prometheus.yml --network book-store-network -d prom/prometheus
+```
+
+## Database seed
+Run .sql script:
+```sql
+DROP TABLE book;
+CREATE TABLE IF NOT EXISTS book ( id     UUID         NOT NULL
+                                , author VARCHAR(255) NOT NULL
+                                , title  VARCHAR(255) NOT NULL
+                                , PRIMARY KEY(id)
+                                );
+```                                
+
+## Stress tests
+Run Apache Benchmark stress tests:
+```bash
+$ ab -n 1000 -c 10 http://localhost:8080/api/v1/books 
 ```
