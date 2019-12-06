@@ -37,7 +37,7 @@ public class BookController {
     @Inject
     BookService bookService;
 
-    //Open API
+    // Open API
     @Operation(summary = "Read all books.")
     @APIResponse(responseCode = "200", content = @Content(mediaType = APPLICATION_JSON, schema = @Schema(implementation = ReadBookResponse.class, type = SchemaType.ARRAY)))
     // Open Metrics
