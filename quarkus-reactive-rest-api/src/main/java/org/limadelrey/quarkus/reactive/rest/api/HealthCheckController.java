@@ -7,9 +7,9 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import javax.enterprise.context.ApplicationScoped;
 
+@Tag(name = "Application health", description = "Endpoints regarding book service health")
 @Liveness
 @ApplicationScoped
-@Tag(name = "Application health", description = "Endpoints regarding book service health")
 public class HealthCheckController implements HealthCheck {
 
     @Override

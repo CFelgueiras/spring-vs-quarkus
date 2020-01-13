@@ -11,7 +11,6 @@ import java.util.UUID;
 @Setter
 @EqualsAndHashCode
 @ToString
-
 public class Book {
 
     private UUID id;

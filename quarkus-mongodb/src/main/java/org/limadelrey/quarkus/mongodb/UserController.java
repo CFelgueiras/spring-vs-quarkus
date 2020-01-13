@@ -1,10 +1,7 @@
 package org.limadelrey.quarkus.mongodb;
 
-import org.jboss.resteasy.annotations.jaxrs.PathParam;
-
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import java.util.List;
 
@@ -25,52 +22,28 @@ public class UserController {
         return userRepository.readAll();
     }
 
-//    @GET
-//    @Path("/books/{id}")
-//    public User readOne(@PathParam("id") Long id) {
-//        final User user = bookRepository.findById(id);
-//
-//        if (user == null) {
-//            throw new RuntimeException("User with id " + id + " not found.");
-//        }
-//
-//        return user;
-//    }
-
-    @POST
-    @Path("/books")
-    @Transactional
-    public void create(User user) {
-        userRepository.insert(user);
+    @GET
+    @Path("/users/{id}")
+    public User readOne(@PathParam("id") String id) {
+        return userRepository.readOne(id);
     }
 
-//    @PUT
-//    @Path("/books/{id}")
-//    @Transactional
-//    public User update(User newBook, @PathParam("id") Long id) {
-//        final User user = bookRepository.findById(id);
-//
-//        if (user == null) {
-//            throw new RuntimeException("User with id " + id + " not found.");
-//        }
-//
-//        user.setAuthor(newBook.getAuthor());
-//        user.setTitle(newBook.getTitle());
-//
-//        return user;
-//    }
-//
-//    @DELETE
-//    @Path("/books/{id}")
-//    @Transactional
-//    public void delete(@PathParam("id") Long id) {
-//        final User user = bookRepository.findById(id);
-//
-//        if (user == null) {
-//            throw new RuntimeException("User with id " + id + " not found.");
-//        }
-//
-//        bookRepository.delete(user);
-//    }
+    @POST
+    @Path("/users")
+    public User create(User user) {
+       return userRepository.insert(user);
+    }
+
+    @PUT
+    @Path("/users/{id}")
+    public void update(User userAfterUpdate, @PathParam("id") String id) {
+        userRepository.update(userAfterUpdate, id);
+    }
+
+    @DELETE
+    @Path("/users/{id}")
+    public void delete(@PathParam("id") String id) {
+        userRepository.delete(id);
+    }
 
 }

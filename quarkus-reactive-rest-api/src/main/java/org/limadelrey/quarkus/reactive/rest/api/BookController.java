@@ -21,12 +21,11 @@ import java.util.UUID;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
-@ApplicationScoped
 @Tag(name = "Books API", description = "Endpoints regarding book interaction")
 @Produces(APPLICATION_JSON)
 @Consumes(APPLICATION_JSON)
 @Path("/api/v1")
-
+@ApplicationScoped
 public class BookController {
 
     @Inject
@@ -101,6 +100,5 @@ public class BookController {
         return bookService.delete(id)
                 .andThen(Single.just(Response.noContent().build()));
     }
-
 
 }

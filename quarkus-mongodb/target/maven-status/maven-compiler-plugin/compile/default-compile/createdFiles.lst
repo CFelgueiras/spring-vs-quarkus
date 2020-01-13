@@ -1,0 +1,4 @@
+org/limadelrey/quarkus/mongodb/UserRepository.class
+org/limadelrey/quarkus/mongodb/User.class
+org/limadelrey/quarkus/mongodb/User$UserBuilder.class
+org/limadelrey/quarkus/mongodb/UserController.class

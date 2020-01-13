@@ -14,7 +14,6 @@ public class BookService {
     @Inject
     BookRepository bookRepository;
 
-
     public Single<List<Book>> readAll() {
         return bookRepository.readAll();
     }
