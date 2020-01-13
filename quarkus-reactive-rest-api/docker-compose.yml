@@ -24,7 +24,7 @@ services:
 
   books-app:
     container_name: book-store-app
-    image: quarkus/book-store
+    image: quarkus/book-reactive-store
     build:
       context: .
       dockerfile: src/main/docker/Dockerfile.jvm

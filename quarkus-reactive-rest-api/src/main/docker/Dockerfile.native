@@ -7,11 +7,11 @@
 #
 # Then, build the image with:
 #
-# docker build -f src/main/docker/Dockerfile.native -t quarkus/book-store-native .
+# docker build -f src/main/docker/Dockerfile.native -t quarkus/book-reactive-store-native .
 #
 # Then run the container using:
 #
-# docker run -i --rm --name book-store-native -p 8080:8080 --network book-store-network quarkus/book-store-native
+# docker run -i --rm --name book-reactive-store-native -p 8080:8080 --network book-store-network quarkus/book-reactive-store-native
 #
 ###
 

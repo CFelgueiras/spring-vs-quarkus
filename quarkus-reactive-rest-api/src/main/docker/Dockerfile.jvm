@@ -7,11 +7,11 @@
 #
 # Then, build the image with:
 #
-# docker build -f src/main/docker/Dockerfile.jvm -t quarkus/book-store-jvm .
+# docker build -f src/main/docker/Dockerfile.jvm -t quarkus/book-reactive-store-jvm .
 #
 # Then run the container using:
 #
-# docker run -i --rm --name book-store-jvm -p 8080:8080 --network book-store-network quarkus/book-store-jvm
+# docker run -i --rm --name book-reactive-store-jvm -p 8080:8080 --network book-store-network quarkus/book-reactive-store-jvm
 #
 ###
 
