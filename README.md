@@ -1,81 +1,78 @@
 # Spring vs Quarkus
-Just some simple REST APIs:
-1. spring-rest-api is built with Spring. It provides a REST API and persists data on a PostgreSQL database;
-2. quarkus-rest-api is built with Quarkus in an imperative way. It provides a REST API and persists data on a PostgreSQL database;
-3. quarkus-reactive-rest-api is built with Quarkus in a reactive way. It provides a REST API, persists data on a PostgreSQL database, generates a OpenAPI specification while providing a representation using Swagger and generates metrics on OpenMetrics specification while providing a representation using Prometheus.
 
-## PostgreSQL
-Run docker container:
+The goal of this repository is to provide a reduced number of Quarkus applications that are able to show its key points concisely while comparing them to a traditional Spring application:
+1. spring-rest-api is built with Spring. It provides a REST API and persists data on a PostgreSQL database;
+2. quarkus-rest-api is built with Quarkus in an imperative way. It provides a REST API, persists data on a PostgreSQL database, generates an OpenAPI specification while providing a representation using Swagger UI and generates metrics on OpenMetrics specification while providing a representation using Prometheus;
+3. quarkus-reactive-rest-api is built with Quarkus in a reactive way. It provides a REST API, persists data on a PostgreSQL database, generates an OpenAPI specification while providing a representation using Swagger UI and generates metrics on OpenMetrics specification while providing a representation using Prometheus.
+
+# Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+## Prerequisites
+
 ```bash
-$ docker run --name book-store-db -p 5432:5432 -e POSTGRES_PASSWORD=postgres --network book-store-network -d postgres:alpine
+Java 8
+Maven 3.6.1
+Docker 19.03.5
 ```
 
-## Spring Rest API
+# Running
+
+## Create Docker network
+```bash
+$ docker network create book-store-network
+```
+
+## Build & run Spring application
 Generate fat .jar:
 ```bash
-$ mvn package spring-boot:repackage
-```
-Build docker image:
-```bash
-$ docker build -t spring/book-store .
+$ mvn clean package spring-boot:repackage
 ```
 
-Run docker container:
+Build docker compose w/ database (PostgreSQL) and application (Spring):
 ```bash
-$ docker run -i --rm --name book-store-spring-api -p 8080:8080 --network book-store-network spring/book-store
+$ docker-compose build
 ```
 
-## Quarkus Rest API
-Generate native executable:
+Run docker compose w/ database (PostgreSQL) and application (Spring):
 ```bash
-$ mvn package -Pnative -Dnative-image.docker-build=true
+$ docker-compose up
 ```
 
-Build docker image:
+## Build & run Quarkus application
+Run with live reload:
 ```bash
-$ docker build -t quarkus/book-store .
+$ mvn compile quarkus:dev
 ```
 
-Run docker container:
+Generate fat .jar:
 ```bash
-$ docker run -i --rm --name book-store-quarkus-api -p 8081:8080 --network book-store-network quarkus/book-store
+$ mvn clean package
 ```
 
-## Quarkus Rest API (Reactive)
-Generate native executable:
+Or generate native executable:
 ```bash
 $ mvn package -Pnative -Dnative-image.docker-build=true
 ```
 
-Build docker image:
+Build docker compose w/ database (PostgreSQL), migrations (Flyway), metrics (Prometheus) and application (Quarkus):
 ```bash
-$ docker build -t quarkus/reactive-book-store .
+$ docker-compose build
 ```
 
-Run docker container:
+Run docker compose w/ database (PostgreSQL), migrations (Flyway), metrics (Prometheus) and application (Quarkus):
 ```bash
-$ docker run -i --rm --name book-store-quarkus-reactive-api -p 8082:8080 --network book-store-network quarkus/reactive-book-store
-```
+$ docker-compose up
+```                          
 
-## Prometheus
-Run docker container (don't forget to change user folder location):
-```bash
-$ docker run --name prometheus -p 9090:9090 -v {USER_FOLDER}/prometheus.yml:/etc/prometheus/prometheus.yml --network book-store-network -d prom/prometheus
-```
-
-## Database seed
-Run .sql script:
-```sql
-DROP TABLE book;
-CREATE TABLE IF NOT EXISTS book ( id     UUID         NOT NULL
-                                , author VARCHAR(255) NOT NULL
-                                , title  VARCHAR(255) NOT NULL
-                                , PRIMARY KEY(id)
-                                );
-```                                
-
-## Stress tests
+## Run stress tests
 Run Apache Benchmark stress tests:
 ```bash
-$ ab -n 1000 -c 10 http://localhost:8080/api/v1/books 
+$ ab -n 10000 -c 10 http://localhost:8080/api/v1/books 
+```
+
+If you don't have Apache Benchmark, run the following Docker container:
+```bash
+$ docker run --rm jordi/ab -n 10000 -c 10 http://localhost:8080/api/v1/books/ 
 ```
