@@ -24,7 +24,7 @@ Docker 19.03.5
 $ docker network create book-store-network
 ```
 
-## Build & Run Spring application
+## Build & run Spring application
 Generate fat .jar:
 ```bash
 $ mvn clean package spring-boot:repackage
@@ -40,7 +40,12 @@ Run docker compose w/ database (PostgreSQL) and application (Spring):
 $ docker-compose up
 ```
 
-## Build & Run Quarkus applications
+## Build & run Quarkus application
+Run with live reload:
+```bash
+$ mvn compile quarkus:dev
+```
+
 Generate fat .jar:
 ```bash
 $ mvn clean package
