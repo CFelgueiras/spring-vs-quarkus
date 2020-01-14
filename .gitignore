@@ -4,4 +4,4 @@
 .idea/**
 
 quarkus-mongodb/**
-Quarkus-polyglot/**
+quarkus-polyglot/**
