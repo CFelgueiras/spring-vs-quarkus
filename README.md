@@ -41,7 +41,7 @@ $ docker-compose up
 ```
 
 ## Build & run Quarkus application
-Run with live reload:
+Run with live reload (test and dev purposes):
 ```bash
 $ mvn compile quarkus:dev
 ```
