@@ -30,12 +30,12 @@ Generate fat .jar:
 $ mvn clean package spring-boot:repackage
 ```
 
-Build docker compose w/ database (PostgreSQL) and application (Spring):
+Build docker compose w/ database and application containers:
 ```bash
 $ docker-compose build
 ```
 
-Run docker compose w/ database (PostgreSQL) and application (Spring):
+Run docker compose w/ database and application containers:
 ```bash
 $ docker-compose up
 ```
@@ -56,23 +56,51 @@ Or generate native executable:
 $ mvn package -Pnative -Dnative-image.docker-build=true
 ```
 
-Build docker compose w/ database (PostgreSQL), migrations (Flyway), metrics (Prometheus) and application (Quarkus):
+Build docker compose w/ database, migrations, monitoring and application containers:
 ```bash
 $ docker-compose build
 ```
 
-Run docker compose w/ database (PostgreSQL), migrations (Flyway), metrics (Prometheus) and application (Quarkus):
+Run docker compose w/ database, migrations, monitoring and application containers:
 ```bash
 $ docker-compose up
 ```                          
 
 ## Run stress tests
-Run Apache Benchmark stress tests:
+Run Apache Bench stress tests:
 ```bash
 $ ab -n 10000 -c 10 http://localhost:8080/api/v1/books 
 ```
 
-If you don't have Apache Benchmark, run the following Docker container:
+If you don't have Apache Bench, run the following Docker container:
 ```bash
 $ docker run --rm jordi/ab -n 10000 -c 10 http://localhost:8080/api/v1/books/ 
 ```
+
+## Other informations
+Useful endpoints:
+
+- POST http://localhost:8080/api/v1/books
+- GET http://localhost:8080/api/v1/books
+- GET http://localhost:8080/api/v1/books/{id}
+- PUT http://localhost:8080/api/v1/books/{id}
+- DELETE http://localhost:8080/api/v1/books/{id}
+- GET http://localhost:8080/health (only on Quarkus applications)
+- GET http://localhost:8080/metrics (only on Quarkus applications)
+- GET http://localhost:8080/open-api (only on Quarkus applications)
+- GET http://localhost:8080/swagger-ui (only on Quarkus applications)
+
+Access Prometheus:
+- GET http://localhost:9090 (only on Quarkus applications)
+
+## Built With
+
+* [Java](https://www.java.com/)
+* [RxJava 2](http://reactivex.io/)
+* [Maven](https://maven.apache.org/)
+* [Docker](https://www.docker.com/)
+* [Quarkus](https://quarkus.io/)
+* [Spring](https://spring.io/)
+* [PostgreSQL](https://www.postgresql.org/)
+* [Flyway](https://flywaydb.org/)
+* [Prometheus](https://prometheus.io/)
