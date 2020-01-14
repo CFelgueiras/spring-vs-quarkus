@@ -20,7 +20,7 @@ public class BookController {
     @GetMapping("/books/{id}")
     public Book readOne(@PathVariable Long id) {
         return bookRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Book with id " + id + " not found."));
+                .orElseThrow(() -> new RuntimeException("Book with id " + id + " not found"));
     }
 
     @PostMapping("/books")
@@ -37,7 +37,7 @@ public class BookController {
 
                     return bookRepository.save(book);
                 })
-                .orElseThrow(() -> new RuntimeException("Book with id " + id + " not found."));
+                .orElseThrow(() -> new RuntimeException("Book with id " + id + " not found"));
     }
 
     @DeleteMapping("/books/{id}")
@@ -45,7 +45,7 @@ public class BookController {
         if (bookRepository.existsById(id)) {
             bookRepository.deleteById(id);
         } else {
-            throw new RuntimeException("Book with id " + id + " not found.");
+            throw new RuntimeException("Book with id " + id + " not found");
         }
     }
 
