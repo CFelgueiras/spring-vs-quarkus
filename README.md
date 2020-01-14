@@ -80,27 +80,27 @@ $ docker run --rm jordi/ab -n 10000 -c 10 http://localhost:8080/api/v1/books/
 ## Other informations
 Useful endpoints:
 
-POST http://localhost:8080/api/v1/books
-GET http://localhost:8080/api/v1/books
-GET http://localhost:8080/api/v1/books/{id}
-PUT http://localhost:8080/api/v1/books/{id}
-DELETE http://localhost:8080/api/v1/books/{id}
-GET http://localhost:8080/health (only on Quarkus applications)
-GET http://localhost:8080/metrics (only on Quarkus applications)
-GET http://localhost:8080/open-api (only on Quarkus applications)
-GET http://localhost:8080/swagger-ui/ (only on Quarkus applications)
+- POST http://localhost:8080/api/v1/books
+- GET http://localhost:8080/api/v1/books
+- GET http://localhost:8080/api/v1/books/{id}
+- PUT http://localhost:8080/api/v1/books/{id}
+- DELETE http://localhost:8080/api/v1/books/{id}
+- GET http://localhost:8080/health (only on Quarkus applications)
+- GET http://localhost:8080/metrics (only on Quarkus applications)
+- GET http://localhost:8080/open-api (only on Quarkus applications)
+- GET http://localhost:8080/swagger-ui (only on Quarkus applications)
 
 Access Prometheus:
-GET http://localhost:9090/ (only on Quarkus applications)
+- GET http://localhost:9090 (only on Quarkus applications)
 
 ## Built With
 
 * [Java](https://www.java.com/)
 * [RxJava 2](http://reactivex.io/)
 * [Maven](https://maven.apache.org/)
+* [Docker](https://www.docker.com/)
 * [Quarkus](https://quarkus.io/)
 * [Spring](https://spring.io/)
 * [PostgreSQL](https://www.postgresql.org/)
 * [Flyway](https://flywaydb.org/)
 * [Prometheus](https://prometheus.io/)
-* [Docker](https://www.docker.com/)
